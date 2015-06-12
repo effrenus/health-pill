@@ -1,0 +1,23 @@
+{
+  "name": "calc",
+  "version": "0.0.0",
+  "authors": [
+    "effrenus <effrenus@gmail.com>"
+  ],
+  "private": true,
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "alt": "~0.17.0",
+    "react": "~0.13.3"
+  },
+  "devDependencies": {
+    "react-animate": "https://github.com/elierotenberg/react-animate.git#~2.0.0"
+  }
+}
