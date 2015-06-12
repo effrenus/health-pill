@@ -23,7 +23,7 @@ body {
   left: 0;
   width: 239px;
   height: 85px;
-  background: url(/src/images/logo.png) 0 0 no-repeat;
+  background: url(../../src/images/logo.png) 0 0 no-repeat;
   text-indent: -1000em;
   z-index: 2; }
 
@@ -31,9 +31,9 @@ body {
   position: relative;
   height: 470px;
   margin-bottom: -25px;
-  background: url(/src/images/sad.png) 50% 100% no-repeat; }
+  background: url(../../src/images/sad.png) 50% 100% no-repeat; }
   .recover.is-recovered {
-    background-image: url(/src/images/happy.png);
+    background-image: url(../../src/images/happy.png);
     background-position: 50% 10px; }
   .recover:before {
     content: '';
@@ -228,7 +228,7 @@ body {
     height: 45px;
     left: -50px;
     top: -10px;
-    background: url(/src/images/clock.svg) 50% 0 no-repeat; }
+    background: url(../../src/images/clock.svg) 50% 0 no-repeat; }
   .period__list li {
     display: inline; }
   .period__list .btn {
@@ -267,7 +267,7 @@ body {
       height: 45px;
       left: -55px;
       top: 0px;
-      background: url(/src/images/p.svg) 50% 0 no-repeat; }
+      background: url(../../src/images/p.svg) 50% 0 no-repeat; }
     .slider__labels li {
       position: absolute;
       top: 0;
