@@ -6,6 +6,8 @@ var webpack_config = require('./webpack.config.js');
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var connect = require('gulp-connect');
+var mincss = require('gulp-minify-css');
+var uglify = require('gulp-uglify');
 
 gulp.task('connect', function() {
   connect.server({
@@ -18,6 +20,7 @@ gulp.task('connect', function() {
 gulp.task('webpack', function(){
 	gulp.src('./src/js/app.js')
 		.pipe(webpack(webpack_config))
+		.pipe(uglify())
 		.pipe(gulp.dest('./dist/js/'))
 		.pipe(connect.reload());
 });
@@ -29,11 +32,12 @@ gulp.task('sass', function(){
             browsers: ['last 2 versions', 'iOS >= 7'],
             cascade: false
         }))
+        .pipe(mincss())
 		.pipe(gulp.dest('./dist/css/'))
 		.pipe(connect.reload());
 });
 
-gulp.task('watch', ['connect'], function(){
+gulp.task('watch', ['sass', 'webpack', 'connect'], function(){
 	gulp.watch('./src/sass/**/*.{sass,scss}', ['sass']);
 	gulp.watch('./src/js/**/*.js', ['webpack']);
 });

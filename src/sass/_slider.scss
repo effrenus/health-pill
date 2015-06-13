@@ -19,7 +19,7 @@
 			width: 45px;
 			height: 45px;
 			left: -55px; top: 0px;
-			background: url(/src/images/p.svg) 50% 0 no-repeat;
+			background: url(../images/ico-profile.svg) 50% 0 no-repeat;
 		}
 		li {
 			position: absolute;
@@ -65,16 +65,19 @@
 		&:before {
 			content: '';
 			position: absolute;
-			left: 5px; top: 5px;
-			width: 36px; height: 36px;
+			left: 4px; top: 4px;
+			width: 38px; height: 38px;
 			background-color: #fff;
 			border-radius: 50%;
+			box-shadow: 0 0 4px #555;
 		}
 		&:after {
 			content: '';
 			position: absolute;
 			left: 16.5px; top: 16px;
 			width: 12px; height: 12px;
+			box-sizing: border-box;
+			border: 1px solid #C61322;
 			background-color: #E21628;
 			border-radius: 50%;
 		}

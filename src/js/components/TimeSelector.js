@@ -18,14 +18,14 @@ export default class TimeSelector extends React.Component {
 	}
 	render() {
 		return (
-			<div className="period">
+			<div className="form__field form__field-time">
 				<ul className="period__list">
 					{Object.keys(periodChoices).map(function(key){
 						var className = 'btn' + (this.state.value === periodChoices[key].value ? ' is-selected' : '');
 						return <li><button onClick={this._onClick} data-period={key} className={className}>{periodChoices[key].label}</button></li>;
 					}.bind(this))}
 				</ul>
-				<label className="period__label">за период</label>
+				<label className="form__field__label">за период</label>
 			</div>
 		);
 	}

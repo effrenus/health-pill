@@ -26,7 +26,7 @@ body {
 	top: 50px; left: 0;
 	width: 239px;
 	height: 85px;
-	background: url(/src/images/logo.png) 0 0 no-repeat;
+	background: url(../images/logo.png) 0 0 no-repeat;
 	text-indent: -1000em;
 	z-index: 2;
 }
@@ -37,10 +37,9 @@ $pillow-expanded: rotate(45deg) scale3d(1.5, 1.5, 1.5);
 	position: relative;
 	height: 470px;
 	margin-bottom: -25px;
-	background: url(/src/images/sad.png) 50% 100% no-repeat;
+	background: url(../images/sad.png) 50% 100% no-repeat;
 	&.is-recovered {
-		background-image: url(/src/images/happy.png);
-		background-position: 50% 10px;
+		background: none;
 	}
 	&:before {
 		content: '';
@@ -55,6 +54,18 @@ $pillow-expanded: rotate(45deg) scale3d(1.5, 1.5, 1.5);
 	}
 	&.is-recovered:before {
 		animation: goodeffect 1s;
+	}
+	&:after {
+		position: absolute;
+		left: 0; top: 0;
+		content: '';
+		width: 100%;
+		height: 100%;
+		background: url(../images/happy.png) 50% 10px no-repeat;
+		visibility: hidden;
+	}
+	&.is-recovered:after {
+		visibility: visible;
 	}
 	&.is-recovered &__pill {
 		opacity: 0;
@@ -115,6 +126,7 @@ $pillow-expanded: rotate(45deg) scale3d(1.5, 1.5, 1.5);
 		}
 	}
 }
+
 @keyframes pulse {
   @include pulse;
 }
@@ -122,62 +134,19 @@ $pillow-expanded: rotate(45deg) scale3d(1.5, 1.5, 1.5);
 .pulse {
 	animation-name: pulse;
 	animation-duration: 100s;
-	animation-delay: 0s;
 	animation-iteration-count: infinite;
 }
 
-.patient {
+.form__field {
 	margin-bottom: 20px;
+
 	&__label {
 		display: block;
 		color: #8AB1DB;
 		text-align: center;
-	}
-}
-
-.period {
-	text-align: center;
-
-	&__label {
-		display: block;
-		color: #8AB1DB;
-	}
-}
-.period__list {
-	position: relative;
-	display: inline-block;
-	text-align: center;
-	margin-bottom: 10px;
-
-	&:before {
-		position: absolute;
-		display: inline-block;
-		content: '';
-		width: 50px;
-		height: 45px;
-		left: -50px; top: -10px;
-		background: url(/src/images/clock.svg) 50% 0 no-repeat;
-	}
-
-	li {
-		display: inline;
-	}
-
-	.btn {
-		display: inline-block;
-		height: 40px;
-		min-width: 100px;
-		margin: 0 5px;
-		border: 1px solid #183D64;
-		background: linear-gradient(180deg, #BFCEE1, #93A4BA);
-		border-radius: 6px;
-		font-weight: bold;
 		font-size: 1.1em;
-		color: #29496D;
-		outline: 0;
-		cursor: pointer;
-		&.is-selected {
-			box-shadow: inset 3px 3px 10px #555;
-		}
+	}
+	&-time {
+		text-align: center;
 	}
 }

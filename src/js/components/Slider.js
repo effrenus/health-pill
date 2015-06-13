@@ -74,7 +74,7 @@ export default class Slider extends React.Component {
 	}
 	render() {
 		return (
-			<div className="patient">
+			<div className="form__field ">
 				<div ref="slider" className="slider-container">
 					<ol className="slider__labels">
 						{this.renderLabels()}
@@ -84,7 +84,7 @@ export default class Slider extends React.Component {
 						{this.renderCursor()}
 					</div>
 				</div>
-				<label className="patient__label">Количество пациентов</label>
+				<label className="form__field__label">Количество пациентов</label>
 			</div>
 		);
 	}
