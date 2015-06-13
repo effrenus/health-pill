@@ -1,0 +1,46 @@
+.period {
+	text-align: center;
+
+	&__label {
+		display: block;
+		color: #8AB1DB;
+	}
+}
+.period__list {
+	position: relative;
+	display: inline-block;
+	text-align: center;
+	margin-bottom: 10px;
+
+	&:before {
+		position: absolute;
+		display: inline-block;
+		content: '';
+		width: 50px;
+		height: 45px;
+		left: -50px; top: -10px;
+		background: url(../images/ico-clock.svg) 50% 0 no-repeat;
+	}
+
+	li {
+		display: inline;
+	}
+
+	.btn {
+		display: inline-block;
+		height: 40px;
+		min-width: 100px;
+		margin: 0 5px;
+		border: 1px solid #183D64;
+		background: linear-gradient(180deg, #BFCEE1, #93A4BA);
+		border-radius: 6px;
+		font-weight: bold;
+		font-size: 1.1em;
+		color: #29496D;
+		outline: 0;
+		cursor: pointer;
+		&.is-selected {
+			box-shadow: inset 3px 3px 10px #555;
+		}
+	}
+}
