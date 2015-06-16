@@ -1,8 +1,19 @@
 'use strict';
 
 import React from 'react';
+import cx from 'bem-classnames';
 
-let periodChoices = {day: {value: 1, label: 'день'}, week: {value: 2, label: 'неделя'}, month: {value: 3, label: 'месяц'}};
+const periodChoices = {
+	day: {value: 1, label: 'день'},
+	week: {value: 2, label: 'неделя'},
+	month: {value: 3, label: 'месяц'}
+};
+const bem_cx = {
+	btn: {
+		name: 'btn',
+		states: ['selected']
+	}
+}
 
 export default class TimeSelector extends React.Component {
 	constructor() {
@@ -21,8 +32,15 @@ export default class TimeSelector extends React.Component {
 			<div className="form__field form__field-time">
 				<ul className="period__list">
 					{Object.keys(periodChoices).map(function(key){
-						var className = 'btn' + (this.state.value === periodChoices[key].value ? ' is-selected' : '');
-						return <li><button onClick={this._onClick} data-period={key} className={className}>{periodChoices[key].label}</button></li>;
+						return (
+							<li key={key}>
+								<button
+									onClick={this._onClick} data-period={key}
+									className={cx(bem_cx.btn, {selected: (this.state.value === periodChoices[key].value)})}>
+									{periodChoices[key].label}
+								</button>
+							</li>
+						);
 					}.bind(this))}
 				</ul>
 				<label className="form__field__label">за период</label>

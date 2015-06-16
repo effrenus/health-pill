@@ -3,6 +3,7 @@
 import React from 'react';
 import Slider from './components/Slider';
 import TimeSelector from './components/TimeSelector';
+import RecoverScene from './components/RecoverScene';
 
 class Form extends React.Component {
 	constructor() {
@@ -32,30 +33,11 @@ class Form extends React.Component {
 	}
 }
 
-class Recover extends React.Component {
-	constructor() {
-		super();
-		this._onClick = this._onClick.bind(this);
-	}
-	_onClick(e) {
-		var elm = this.refs.container.getDOMNode();
-		elm.className = elm.className + ' is-recovered';
-	}
-	render() {
-		return (
-			<div ref="container" className="recover">
-				<i className="recover__patient"></i>
-				<i onClick={this._onClick} className="recover__pill pulse"></i>
-			</div>
-		);
-	}
-}
-
 class Scene extends React.Component {
 	render() {
 		return (
 			<div>
-				<Recover />
+				<RecoverScene />
 				<Form />
 			</div>
 		);

@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import events from '../mixins/events';
+import events from '../utils/events';
 
 export default class Cursor extends React.Component {
 	render() {

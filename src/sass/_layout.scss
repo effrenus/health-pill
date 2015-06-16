@@ -2,6 +2,7 @@
 	margin: 0;
 	padding: 0;
 	list-style-type: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 html, body {
@@ -33,14 +34,17 @@ body {
 
 $pillow-normal: rotate(45deg) scale3d(1, 1, 1);
 $pillow-expanded: rotate(45deg) scale3d(1.5, 1.5, 1.5);
+
 .recover {
 	position: relative;
 	height: 470px;
 	margin-bottom: -25px;
 	background: url(../images/sad.png) 50% 100% no-repeat;
-	&.is-recovered {
+
+	&.is-swallowed {
 		background: none;
 	}
+
 	&:before {
 		content: '';
 		position: absolute;
@@ -49,12 +53,14 @@ $pillow-expanded: rotate(45deg) scale3d(1.5, 1.5, 1.5);
 		left: 54%;
 		top: 350px;
 		border-radius: 50%;
-		background-color: #00F525;
 		opacity: 0;
 	}
-	&.is-recovered:before {
-		animation: goodeffect 1s;
+	&.is-candrop:before {
+		background-color: red;
+		animation: heartbeat 1s;
+		animation-iteration-count: infinite;
 	}
+
 	&:after {
 		position: absolute;
 		left: 0; top: 0;
@@ -64,25 +70,30 @@ $pillow-expanded: rotate(45deg) scale3d(1.5, 1.5, 1.5);
 		background: url(../images/happy.png) 50% 10px no-repeat;
 		visibility: hidden;
 	}
-	&.is-recovered:after {
+	&.is-swallowed:after {
 		visibility: visible;
 	}
-	&.is-recovered &__pill {
-		opacity: 0;
-	}
+
 	&__pill {
 		position: absolute;
 		top: 260px;
-		overflow: hidden;
-		transform: $pillow-normal;
-		width: 100px;
-		height: 40px;
-		border: 1px solid #000;
-		background: linear-gradient(90deg, #F14040 50%, #000 50%, #000 51%, #DCDEDF 51%, #DCDEDF 100%);
-		border-radius: 30px;
-		cursor: pointer;
-		transition: all 0.5s;
-		&:before {
+		transition: opacity 1s;
+
+		&__inner {
+			position: absolute;
+			overflow: hidden;
+			width: 100px;
+			height: 40px;
+			border: 1px solid #000;
+			background: linear-gradient(90deg, #F14040 50%, #000 50%, #000 51%, #DCDEDF 51%, #DCDEDF 100%);
+			border-radius: 30px;
+			cursor: pointer;
+			transform: $pillow-normal;
+		}
+		&__inner--pulse {
+			animation: pillowpulse 100s infinite;
+		}
+		&__inner:before {
 			content: '';
 			top: 11px;
 			left: 0px;
@@ -94,9 +105,12 @@ $pillow-expanded: rotate(45deg) scale3d(1.5, 1.5, 1.5);
 			background: linear-gradient(90deg, #AF0000 50%, #000 50%, #000 51%, #B0B9C4 51%, #B0B9C4 100%);
 		}
 	}
+	&.is-swallowed &__pill {
+		opacity: 0;
+	}
 }
 
-@keyframes goodeffect {
+@keyframes heartbeat {
 	0 {
 		opacity: 0;
 		transform: scale(1);
@@ -110,11 +124,12 @@ $pillow-expanded: rotate(45deg) scale3d(1.5, 1.5, 1.5);
 	}
 }
 
-@mixin pulse {
+@mixin pillowpulse {
 	$frames: 5;
 	$animating: 100% / $frames;
 	@for $i from 0 to $frames {
 		$frame: $i * $animating;
+		@if $i == $frames { $frame: 100% - $animating }
 		#{$frame} {
 			transform: $pillow-normal;
 		}
@@ -127,14 +142,8 @@ $pillow-expanded: rotate(45deg) scale3d(1.5, 1.5, 1.5);
 	}
 }
 
-@keyframes pulse {
-  @include pulse;
-}
-
-.pulse {
-	animation-name: pulse;
-	animation-duration: 100s;
-	animation-iteration-count: infinite;
+@keyframes pillowpulse {
+  @include pillowpulse;
 }
 
 .form__field {
