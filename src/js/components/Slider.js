@@ -1,12 +1,13 @@
 'use strict';
 
-import React from 'react';
-import events from '../mixins/events';
+import React, { PropTypes } from 'react';
+import events from '../utils/events';
 import Cursor from './Cursor';
+import Drag from './Drag';
 
 let sliderMargin = 20;
 
-export default class Slider extends React.Component {
+export default class Slider extends Drag {
 	constructor() {
 		super();
 		this.state = { boundWidth: 0, value: 1, offset: 0 };
@@ -21,28 +22,20 @@ export default class Slider extends React.Component {
 	componentDidMount() {
 		this._onResize();
 	}
-	_pauseEvent(e) {
-  		if (e.stopPropagation) e.stopPropagation();
-  		if (e.preventDefault) e.preventDefault();
-  		e.cancelBubble = true;
-  		e.returnValue = false;
-  		return false;
-	}
 	_onResize() {
 		var slider = this.refs.slider.getDOMNode();
 		this.setState({boundWidth: slider.clientWidth, elmOffset: slider.getBoundingClientRect().left, offset: this.getOffset(this.state.value)});
 	}
 	_onDragStart(e) {
+		var e = events.isTouchDevice() ? e.changedTouches[e.changedTouches.length - 1] : e;
 		var position = e.pageX;
 		this.setState({startPosition: position});
 
-		events.addEvent(window, events.dragEventFor['move'], this._onDrag);
-    	events.addEvent(window, events.dragEventFor['end'], this._onDragEnd);
-    	this._pauseEvent(e);
+		super._onDragStart(e);
 	}
 	_onDrag(e) {
+		var e = events.isTouchDevice() ? e.changedTouches[e.changedTouches.length - 1] : e;
 		var position = e.pageX;
-		var diff = position - this.state.startPosition;
 		var newValue = Math.round((position - this.state.elmOffset) / (this.state.boundWidth / 20) + 1);
 		newValue = this.normValue(newValue);
 		if(newValue != this.state.value){
@@ -51,8 +44,7 @@ export default class Slider extends React.Component {
 	}
 	_onDragEnd(e){
 		this.props.onChange(this.state.value);
-		events.removeEvent(window, events.dragEventFor['move'], this._onDrag);
-    	events.removeEvent(window, events.dragEventFor['end'], this._onDragEnd);
+		super._onDragEnd(e);
 	}
 	normValue(value) {
 		return Math.min(this.props.max, Math.max(this.props.min, value));
@@ -65,8 +57,9 @@ export default class Slider extends React.Component {
 		var elmsList = [];
 		for(var i = this.props.min; i <= this.props.max; i++){
 			var clsName = (this.state.value === i) ? 'is-selected' : '';
-			elmsList.push(<li className={clsName} style={{left: this.getOffset(i) + 'px'}}>{i}</li>)
+			elmsList.push(<li key={i} className={clsName} style={{left: this.getOffset(i) + 'px'}}>{i}</li>)
 		}
+
 		return elmsList;
 	}
 	renderCursor() {
@@ -91,7 +84,7 @@ export default class Slider extends React.Component {
 }
 Slider.defaultProps = {min: 0, max: 100, value: 0, onChange: function(){}};
 Slider.propTypes = {
-	min: React.PropTypes.number,
-	max: React.PropTypes.number,
-	value: React.PropTypes.number
+	min: PropTypes.number,
+	max: PropTypes.number,
+	value: PropTypes.number
 }
